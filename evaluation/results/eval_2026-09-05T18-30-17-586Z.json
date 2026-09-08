@@ -1,0 +1,121 @@
+{
+  "samples": 3,
+  "runs": [
+    {
+      "mode": "normal",
+      "turnTimeMs": 1208,
+      "llmMs": 0,
+      "toolMs": 1206,
+      "staleDiscarded": 0,
+      "interruptCount": 0,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "normal",
+      "turnTimeMs": 1202,
+      "llmMs": 0,
+      "toolMs": 1201,
+      "staleDiscarded": 0,
+      "interruptCount": 0,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "normal",
+      "turnTimeMs": 1212,
+      "llmMs": 0,
+      "toolMs": 1212,
+      "staleDiscarded": 0,
+      "interruptCount": 0,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "context_continuity",
+      "turnTimeMs": 2409,
+      "llmMs": 0,
+      "toolMs": 0,
+      "staleDiscarded": 0,
+      "interruptCount": 0,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "context_continuity",
+      "turnTimeMs": 2413,
+      "llmMs": 0,
+      "toolMs": 0,
+      "staleDiscarded": 0,
+      "interruptCount": 0,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "context_continuity",
+      "turnTimeMs": 2416,
+      "llmMs": 0,
+      "toolMs": 0,
+      "staleDiscarded": 0,
+      "interruptCount": 0,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "interrupt",
+      "turnTimeMs": 3001,
+      "llmMs": 0,
+      "toolMs": 1210,
+      "staleDiscarded": 1,
+      "interruptCount": 1,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "interrupt",
+      "turnTimeMs": 3006,
+      "llmMs": 0,
+      "toolMs": 1209,
+      "staleDiscarded": 1,
+      "interruptCount": 1,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    },
+    {
+      "mode": "interrupt",
+      "turnTimeMs": 3014,
+      "llmMs": 0,
+      "toolMs": 1204,
+      "staleDiscarded": 1,
+      "interruptCount": 1,
+      "spokenFirst": "Sony WH-1000XM5 Headphones, order VR-48291, is out for delivery. It is out for d",
+      "ok": true
+    }
+  ],
+  "summary": {
+    "normal": {
+      "avgTurnMs": 1207,
+      "avgLlmMs": 0,
+      "avgToolMs": 1206,
+      "stale": 0,
+      "interrupts": 0,
+      "ok": true
+    },
+    "context_continuity": {
+      "avgTurnMs": 2413,
+      "avgLlmMs": 0,
+      "avgToolMs": 0,
+      "stale": 0,
+      "interrupts": 0,
+      "ok": true
+    },
+    "interrupt": {
+      "avgTurnMs": 3007,
+      "avgLlmMs": 0,
+      "avgToolMs": 1208,
+      "stale": 1,
+      "interrupts": 1,
+      "ok": true
+    }
+  }
+}

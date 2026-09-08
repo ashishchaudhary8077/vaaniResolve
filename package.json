@@ -1,0 +1,30 @@
+{
+  "name": "vaaniresolve",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VaaniResolve — Talk. Interrupt. Resolve. A voice-native AI commerce-support agent with real interruption + stale-result protection.",
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev": "concurrently -n server,web -c blue,green \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev -w apps/server",
+    "dev:web": "npm run dev -w apps/web",
+    "start": "npm run start -w apps/server",
+    "test": "npm run test --workspaces --if-present",
+    "test:stress": "node --import tsx --test apps/server/src/stress.test.ts",
+    "demo": "npm run demo -w apps/server --",
+    "eval": "npm run eval -w apps/server --",
+    "scan:secrets": "node scripts/scan-secrets.mjs",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "pdf": "node scripts/gen-report-pdf.cjs"
+  },
+  "devDependencies": {
+    "@types/three": "^0.169.0",
+    "concurrently": "^9.2.4",
+    "typescript": "^5.9.3"
+  }
+}

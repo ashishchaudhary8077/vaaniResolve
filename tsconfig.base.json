@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "noEmit": true,
+    "paths": {
+      "@vaaniresolve/shared": ["./packages/shared/src/index.ts"],
+      "@vaaniresolve/state": ["./packages/state/src/index.ts"],
+      "@vaaniresolve/tools": ["./packages/tools/src/index.ts"],
+      "@vaaniresolve/rime": ["./packages/rime/src/index.ts"],
+      "@vaaniresolve/agent": ["./packages/agent/src/index.ts"],
+      "@vaaniresolve/voice": ["./packages/voice/src/index.ts"]
+    }
+  }
+}
