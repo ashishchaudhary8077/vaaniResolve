@@ -194,6 +194,22 @@ wss.on('connection', (ws) => {
   });
 });
 
+// Surface startup failures (notably EADDRINUSE from a port clash) with a clear,
+// actionable message instead of an opaque uncaught exception. Must be attached
+// BEFORE listen(): a synchronous bind failure emits 'error' before the listen
+// callback runs, so a late handler would never see it.
+server.on('error', (err: NodeJS.ErrnoException) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`[vaaniresolve] FATAL: port ${PORT} is already in use by another process. Change PORT in the repo-root .env (or free :${PORT} and stop the other process), then restart.`);
+  } else {
+    console.error('[vaaniresolve] server failed to start:', err);
+  }
+  process.exit(1);
+});
+
 server.listen(PORT, () => {
   console.log(`[vaaniresolve] server listening on http://localhost:${PORT}  rime=${rimeConfig.apiKey ? 'configured' : 'unconfigured'} agent=${agentKind}`);
 });
+
+// The dev server (tsx --watch) restarts this file on change; re-registering the
+// error handler above for each boot is fine because the process exits on error.

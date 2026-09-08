@@ -43,11 +43,12 @@ export class AudioPlaybackController {
   private nextStartTime = 0;
   /**
    * Persistent output chain shared by every chunk. Rime PCM is decoded and
-   * scheduled with the gapless clock, then passes through a voice-clarity chain
-   * before reaching the speakers: a presence high-shelf (brighter highs on the
-   * small laptop drivers that roll off), a modest loudness boost, and a soft
-   * limiter so the boost can never clip. Nodes are created once against the
-   * AudioContext and reused — the chain never interrupts gapless scheduling.
+   * scheduled with the gapless clock, then passes through a deliberately
+   * neutral voice chain before reaching the speakers: a very light presence
+   * high-shelf, a small loudness lift, and a gentle limiter so nothing can
+   * clip. Goals are natural + clear + non-distorted speech on laptop drivers —
+   * no aggressive boosting. Nodes are created once against the AudioContext and
+   * reused — the chain never interrupts gapless scheduling.
    */
   private outTail: AudioNode | null = null;
 
@@ -64,14 +65,14 @@ export class AudioPlaybackController {
       const highshelf = ctx.createBiquadFilter();
       highshelf.type = 'highshelf';
       highshelf.frequency.value = 2800;
-      highshelf.gain.value = 4; // +4 dB presence — perception of "clearer" highs
+      highshelf.gain.value = 1.25; // +1.25 dB — gentle presence, no harsh treble
       const loudness = ctx.createGain();
-      loudness.gain.value = 1.5; // ~+3.5 dB — the Rime stream idles quiet on laptops
+      loudness.gain.value = 1.12; // ~+1 dB — light lift, keeps natural level
       const limiter = ctx.createDynamicsCompressor();
-      limiter.threshold.value = -6;
-      limiter.knee.value = 6;
-      limiter.ratio.value = 6;
-      limiter.attack.value = 0.004;
+      limiter.threshold.value = -12; // engages only on real peaks — rarely sqashes
+      limiter.knee.value = 12;
+      limiter.ratio.value = 2.2; // gentle glue, not a squash
+      limiter.attack.value = 0.008;
       limiter.release.value = 0.25;
       highshelf.connect(loudness).connect(limiter).connect(ctx.destination);
       this.outTail = highshelf; // sources connect into the chain head

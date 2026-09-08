@@ -20,6 +20,7 @@
     "eval": "npm run eval -w apps/server --",
     "scan:secrets": "node scripts/scan-secrets.mjs",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "typecheck:contract": "tsc --noEmit -p tsconfig.contract.json",
     "pdf": "node scripts/gen-report-pdf.cjs"
   },
   "devDependencies": {

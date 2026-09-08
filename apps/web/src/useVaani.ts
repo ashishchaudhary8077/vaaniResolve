@@ -233,16 +233,19 @@ export function useVaani(wsUrl: string) {
         }
         case 'rime_chunk': {
           const p = msg.payload as { audioBase64?: string; sampleRate?: number; generation?: number; disclosedFallback?: boolean; reason?: string };
-          // Fallback is tracked (developer panel + logs) but never announced in
-          // the visible transcript — the demo UI stays clean.
+          // Exactly ONE voice path per sentence:
+          //   • success  — real Rime PCM is the only output (queued below);
+          //   • fallback — the browser's built-in TTS speaks the response text,
+          //     and the disclosed PCM "tone" chunk is deliberately NOT queued,
+          //     so the two sources can never overlap (no radio-like double-speak).
           if (p.disclosedFallback) {
             patch({ speechFallback: true });
             console.info('[vaani] fallback TTS:', p.reason ?? 'fallback active');
-            // Real Rime audio isn't coming for this sentence — speak it via the
-            // browser's built-in TTS so the response is still heard (Requirement 1).
+            interruptLocal(); // silence any still-playing Rime audio first
             if (lastAssistantTextRef.current) speakViaBrowser(lastAssistantTextRef.current);
+          } else if (p.audioBase64) {
+            queuePcm(p.audioBase64, p.sampleRate ?? 24000, p.generation ?? msg.generation, ctx);
           }
-          if (p.audioBase64) queuePcm(p.audioBase64, p.sampleRate ?? 24000, p.generation ?? msg.generation, ctx);
           break;
         }
         case 'rime_first_audio': {
@@ -294,7 +297,7 @@ export function useVaani(wsUrl: string) {
       wsRef.current?.close();
       wsRef.current = null;
     };
-  }, [wsUrl, patch, pushTranscript, queuePcm, speakViaBrowser]);
+  }, [wsUrl, patch, pushTranscript, queuePcm, speakViaBrowser, interruptLocal]);
 
   /* -------------------------------------------------------------- STT */
 

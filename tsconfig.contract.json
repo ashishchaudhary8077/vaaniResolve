@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@vaaniresolve/shared": ["./packages/shared/src/api.d.ts"],
+      "@vaaniresolve/state": ["./packages/state/src/api.d.ts"],
+      "@vaaniresolve/tools": ["./packages/tools/src/api.d.ts"],
+      "@vaaniresolve/rime": ["./packages/rime/src/api.d.ts"],
+      "@vaaniresolve/agent": ["./packages/agent/src/api.d.ts"],
+      "@vaaniresolve/voice": ["./packages/voice/src/api.d.ts"]
+    }
+  },
+  "include": ["packages/**/src", "apps/server/src"]
+}
